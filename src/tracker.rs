@@ -84,11 +84,6 @@ fn parse_tracker_response(response: &[u8]) -> Result<TrackerResponse, Box<dyn st
             .into());
         }
 
-        // print root dictionary keys as string
-        for key in root_dict.keys() {
-            println!("Key: {:?}", String::from_utf8_lossy(key));
-        }
-
         let interval = match root_dict.get(&b"interval"[..]) {
             Some(BencodeValue::Integer(i)) => *i as u32,
             _ => return Err("Missing or invalid 'interval' field".into()),
